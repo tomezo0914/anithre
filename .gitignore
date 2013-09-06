@@ -1,0 +1,12 @@
+.rspec
+.sass-cache
+/.bundle
+/vendor/bundle
+*.rdoc
+*.lock
+*.swp
+/log/*
+/tmp/*
+/config/database.yml
+/config/auth.yml
+/public/img/tcs/t
