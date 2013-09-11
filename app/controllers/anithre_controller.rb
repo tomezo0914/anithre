@@ -1,0 +1,2 @@
+class AnithreController < ApplicationController
+end
