@@ -1,4 +1,4 @@
-class TopController AnithreController
+class TopController < AnithreController
   def index
   end
 end
