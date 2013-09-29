@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Anithre</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
+  <title><%= @head_title ? @head_title : 'Anithre' %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag "application", media: "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <%= yield %>
 
+<%= javascript_include_tag "application" %>
+<% if @content_for_javascripts %>
+  <% @content_for_javascripts.each do |js| %>
+  <%= js %>
+  <% end %>
+<% end %>
 </body>
 </html>
