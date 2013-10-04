@@ -1,7 +1,11 @@
 Anithre::Application.routes.draw do
   root to: 'top#index'
 
-  get 'content/:id' => 'content#index'
+  get 'content/:id' => 'content#show'
+  get 'content/create' => 'content#auth_create'
+  post 'content/create' => 'content#auth_create'
+  get 'content/edit/:id' => 'content#auth_edit'
+  post 'content/edit/:id' => 'content#auth_edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
