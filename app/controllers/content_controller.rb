@@ -2,6 +2,7 @@ class ContentController < AnithreController
   def show
     _params = show_params
     @content = Content.get_content_by_id(_params[:id].to_i, status: Content::Status[:public])
+    render template: '/shared/error_404', status: 404 and return if @content.blank?
   end
 
   def create

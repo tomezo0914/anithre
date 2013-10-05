@@ -1,6 +1,8 @@
 <%
   javascript_lazy_include_tag "content"
+  content_id = @content.present? ? @content.id  : ''
 %>
+<%= hidden_field_tag 'content_id', content_id %>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -17,7 +19,7 @@
         <li><a href="#">Account</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a class="show-message-dialog" href="#">コメント</a></li>
+        <li><a data-toggle="modal" class="btn btn-sm show-content-message-dialog" href="#showContentMessageDialog">コメント</a></li>
       </ul>
     </div>
   </div>
@@ -66,3 +68,5 @@
   <!-- /footer -->
 </div>
 <!-- /container -->
+
+<%= render "shared/content_message_dialog" %>

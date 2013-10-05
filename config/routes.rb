@@ -7,6 +7,8 @@ Anithre::Application.routes.draw do
   get 'content/edit/:id' => 'content#auth_edit'
   post 'content/edit/:id' => 'content#auth_edit'
 
+  post 'message/create' => 'message#auth_create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
