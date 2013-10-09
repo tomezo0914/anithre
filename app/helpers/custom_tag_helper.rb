@@ -3,7 +3,7 @@ module CustomTagHelper
     if title.nil?
       title = 'Anithre'
     else
-      title = suffix ? "#{title} - heap up your favorite things" : title
+      title = suffix ? "#{title} - Anithre" : title
     end
     @head_title = title
   end

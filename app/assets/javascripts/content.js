@@ -15,10 +15,11 @@ $(function() {
       $.ajax({
         type: 'POST',
         url: '/message/create',
-        data: { content_id: content_id, message: message },
+        data: { content_id: content_id, body: message },
         success: function(data, dataType) {
           if (typeof data != 'undefined' && data != null) {
-            location.href = location.href.replace('#', '');
+            var data = { message: data.body };
+            $('.content-message').prepend($('#content_each_message').render(data));
           }
         },
         error: function(xhr, textStatus, errorThrown) {

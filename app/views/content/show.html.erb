@@ -1,72 +1,46 @@
 <%
-  javascript_lazy_include_tag "content"
-  content_id = @content.present? ? @content.id  : ''
+javascript_lazy_include_tag "content"
+content_id = @content.present? ? @content.id  : ''
+_title = "#{@content.title} 第#{@content.episode}話"
+head_title _title
 %>
 <%= hidden_field_tag 'content_id', content_id %>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collaps">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Anithre</a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="#">Account</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a data-toggle="modal" class="btn btn-sm show-content-message-dialog" href="#showContentMessageDialog">コメント</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- /navbar -->
+<%= render "shared/global_navbar" %>
 
 <div class="container">
   <div class="masthead">
-    <h1 class="text-muted">あの日見た花の名を僕達はまだ知らない</h1>
-    <ul class="nav nav-justified">
-      <li><a href="">Home</a></li>
-      <li><a href="">Home</a></li>
-      <li><a href="">Home</a></li>
-      <li><a href="">Home</a></li>
-      <li><a href="">Home</a></li>
+    <h1 class="text-muted"><%= _title %></h1>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+      <li><a href="#wiki" data-toggle="tab">Wiki</a></li>
     </ul>
   </div>
   <div class="jumbotron">
-    <h3 class="text-muted">あの日見た花の名を僕達はまだ知らない</h3>
-    <p class="lead">xxxxxxxxxxxxxx</p>
+    <h3 class="text-muted"><%= @content.subtitle %></h3>
+    <p class="lead"><%= @content.description %></p>
     <iframe width="560" height="315" src="//www.youtube.com/embed/YDP_VmDnQ-s" frameborder="0" allowfullscreen></iframe>
   </div>
   <!-- /jumbotron -->
-  <div class="row">
-    <div class="col-lg-4">
+  <div class="row content-message">
+    <% @content.messages.each do |message| %>
+    <div id="m_<%= message.id %>" class="col-lg-4">
       <h2>Heading</h2>
-      <p>xxxxxxxxxxxxx</p>
+      <p><%= message.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+      <p><%= message.body %></p>
     </div>
-    <div class="col-lg-4">
-      <h2>Heading</h2>
-      <p>xxxxxxxxxxxxx</p>
-    </div>
-    <div class="col-lg-4">
-      <h2>Heading</h2>
-      <p>xxxxxxxxxxxxx</p>
-    </div>
+    <% end %>
   </div>
   <!-- /row -->
-  <div>
-    <p>p</p>
-  </div>
-  <hr>
-  <div class="footer">
-    <p>anithre.com 2013</p>
-  </div>
-  <!-- /footer -->
+
+  <%= render "shared/global_footer" %>
 </div>
 <!-- /container -->
 
 <%= render "shared/content_message_dialog" %>
+
+<script id="content_each_message" type="text/x-jsrender"">
+<div class="col-lg-4">
+  <h2>Heading</h2>
+  <p>{{:message}}</p>
+</div>
+</script>
