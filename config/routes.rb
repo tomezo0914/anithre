@@ -1,5 +1,4 @@
 Anithre::Application.routes.draw do
-  devise_for :users
   root to: 'top#index'
 
   get 'content/edit/:id' => 'content#auth_edit'
