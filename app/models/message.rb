@@ -4,6 +4,8 @@ class Message < ActiveRecord::Base
     public: 1
   }
 
+  attr_accessor :user_name
+
   class << self
     def get_by_id(id, status: nil, user_id: nil)
       status = [Status[:private], Status[:public]] if status.blank?
@@ -29,13 +31,14 @@ class Message < ActiveRecord::Base
         message.content_id = params[:content_id]
         message.body = params[:body]
         #message.user_id = params[:user_id]
-        message.user_id = 10
+        message.user_id = 0
         message.ip = params[:ip]
         message.status = Status[:private]
         message.updated_at = current_timestamp
 
         message.save!
 
+        message.user_name = "anonymoous" if 1 == 1
         message
       end
     end

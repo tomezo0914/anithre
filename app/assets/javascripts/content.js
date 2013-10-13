@@ -18,7 +18,12 @@ $(function() {
         data: { content_id: content_id, body: message },
         success: function(data, dataType) {
           if (typeof data != 'undefined' && data != null) {
-            var data = { message: data.body };
+            var data = {
+              id: data.id,
+              message: data.body,
+              user_name: data.user_name,
+              updated_at: Anithre.Utility.formatDate(new Date(data.updated_at), '%Y-%m-%d %H:%M:%S')
+            };
             $('.content-message').prepend($('#content_each_message').render(data));
           }
         },

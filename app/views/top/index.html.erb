@@ -1,4 +1,12 @@
 <div class="container">
   <br /><br />
-  <h1>Stool for 4travel</h1>
+  <h1>Anithre</h1>
+  <ul>
+    <% @contents.each do |content| %>
+      <% content_title = "#{content.title} 第#{content.episode}話" %>
+    <li>
+      <%= link_to content_title, controller: "content", action: "show", id: content.id %>
+    </li>
+    <% end %>
+  </ul>
 </div>

@@ -8,6 +8,16 @@ class ContentController < AnithreController
     render template: '/shared/error_404', status: 404 and return if @content.blank?
   end
 
+  def auth_create
+    user_id = 0
+    if request.post?
+      _params = create_params
+      @content = Content.edit(_params, user_id: user_id, ip: get_ip)
+      redirect_to controller "content", action: "auth_edit", id: @content.id and return
+    end
+    render action: "auth_edit" and return
+  end
+
   def auth_edit
     _params = edit_params
     user_id = 0
@@ -16,6 +26,15 @@ class ContentController < AnithreController
     else
       @content = Content.get_by_id(_params[:id].to_i, user_id: user_id)
     end
+  end
+
+  def auth_publish
+    _params = publish_params
+    user_id = 0
+    render template: '/shared/error_404', status: 404 and return unless request.post?
+
+    @content = Content.publish(_params, user_id: user_id)
+    redirect_to controller "content", action: "auth_edit", id: @content.id and return
   end
 
   private
@@ -30,5 +49,9 @@ class ContentController < AnithreController
 
   def edit_params
     params.permit(:id, :title, :subtitle, :description, :episode)
+  end
+
+  def publish_params
+    params.permit(:id)
   end
 end

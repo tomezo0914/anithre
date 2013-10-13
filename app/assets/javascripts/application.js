@@ -31,3 +31,5 @@
 //= require twitter/bootstrap/affix
 
 //= require jsrender.min
+
+//= require anithre.utility

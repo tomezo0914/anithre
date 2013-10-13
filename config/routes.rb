@@ -1,10 +1,11 @@
 Anithre::Application.routes.draw do
   root to: 'top#index'
 
+  get 'content/create' => 'content#auth_create'
+  post 'content/create' => 'content#auth_create'
   get 'content/edit/:id' => 'content#auth_edit'
   post 'content/edit/:id' => 'content#auth_edit'
-  get 'content/edit' => 'content#auth_edit'
-  post 'content/edit' => 'content#auth_edit'
+  post 'content/publish/:id' => 'content#auth_publish'
   get 'content/:id' => 'content#show'
 
   post 'message/create' => 'message#auth_create'

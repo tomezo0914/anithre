@@ -23,10 +23,12 @@ head_title _title
   <!-- /jumbotron -->
   <div class="row content-message">
     <% @content.messages.each do |message| %>
+    <% user_name = "anonymous" %>
     <div id="m_<%= message.id %>" class="col-lg-4">
-      <h2>Heading</h2>
-      <p><%= message.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+      <h4><%= message.id %>:&nbsp;<%= user_name %></h4>
       <p><%= message.body %></p>
+      <hr>
+      <p><%= message.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
     </div>
     <% end %>
   </div>
@@ -39,8 +41,10 @@ head_title _title
 <%= render "shared/content_message_dialog" %>
 
 <script id="content_each_message" type="text/x-jsrender"">
-<div class="col-lg-4">
-  <h2>Heading</h2>
+<div id="m_{{:id}}" class="col-lg-4">
+  <h3>{{:id}}:&nbsp;{{:user_name}}</h3>
   <p>{{:message}}</p>
+  <hr>
+  <p>{{:updated_at}}</p>
 </div>
 </script>

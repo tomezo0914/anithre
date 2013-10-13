@@ -1,6 +1,8 @@
 <%
   javascript_lazy_include_tag "content"
 
+  head_title "コンテンツ作成"
+
   title = @content.present? ? @content.title : ""
   subtitle = @content.present? ? @content.subtitle : ""
   description = @content.present? ? @content.description : ""
@@ -9,7 +11,7 @@
 <%= render "shared/global_navbar" %>
 
 <div class="container">
-  <%= form_tag({ controller: "content", action: "auth_edit" }, role: "form") do %>
+  <%= form_tag({ controller: "content", action: action_name }, role: "form") do %>
     <div class="form-group">
       <label class="">Title</label>
       <%= text_field_tag "title", title, placeholder: "Title", class: "form-control" %>
@@ -29,6 +31,11 @@
     <button class="btn btn-sm btn-primary" type="submit ">Save</button>
   <% end %>
 
+  <% if @content.present? %>
+  <%= form_tag({ controller: "content", action: "auth_publish", id: @content.id }, role: "form") do %>
+    <button class="btn btn-sm btn-primary" type="submit ">Publish</button>
+  <% end %>
+  <% end %>
   <%= render "shared/global_footer" %>
 </div>
 <!-- /container -->
