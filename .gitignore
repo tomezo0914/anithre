@@ -8,5 +8,5 @@
 /log/*
 /tmp/*
 /config/database.yml
-/config/auth.yml
+/config/omniauth.yml
 /public/img/tcs/t

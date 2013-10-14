@@ -1,6 +1,12 @@
 <div class="container">
   <br /><br />
   <h1>Anithre</h1>
+  <div>
+    <ul>
+      <li><%= link_to "Twitter Login", "/auth/twitter" %></li>
+      <li><%= link_to "Facebook Login", "/auth/facebook" %></li>
+    </ul>
+  </div>
   <ul>
     <% @contents.each do |content| %>
       <% content_title = "#{content.title} 第#{content.episode}話" %>
