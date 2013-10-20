@@ -11,7 +11,7 @@ Anithre::Application.routes.draw do
   post 'message/create' => 'message#auth_create'
 
   get "/auth/:provider/callback" => "session#callback"
-  post "/logout" => "session#destroy", :as => :logout
+  delete "/sign_out" => "session#destroy", :as => :logout
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

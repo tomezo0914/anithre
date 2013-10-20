@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002143644) do
+ActiveRecord::Schema.define(version: 20131016033900) do
 
   create_table "contents", force: true do |t|
     t.string   "title",                   null: false
@@ -34,5 +34,15 @@ ActiveRecord::Schema.define(version: 20131002143644) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "omniusers", force: true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "omniusers", ["provider", "uid"], name: "provider_uid_key", unique: true, using: :btree
 
 end

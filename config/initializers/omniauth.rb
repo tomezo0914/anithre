@@ -5,7 +5,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   twitter_conf = config[Rails.env]["twitter"]
   twitter_options = {}
   twitter_options = { client_options: { proxy: twitter_conf["proxy"] } } if twitter_conf["proxy"].present?
-  provider :twitter, twitter_conf["consumer_key"], twitter_conf["consumer_secret"] , twitter_options
+  #provider :twitter, twitter_conf["consumer_key"], twitter_conf["consumer_secret"] , twitter_options
+  provider :twitter, twitter_conf["consumer_key"], twitter_conf["consumer_secret"]
 
   # facebook setting
   facebook_conf = config[Rails.env]["facebook"]

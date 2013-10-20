@@ -15,10 +15,25 @@
           <a data-toggle="modal" class="btn btn-sm show-content-message-dialog" href="#showContentMessageDialog"><span class="glyphicon glyphicon-pencil"></span>&nbsp;コメント</a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>&nbsp;設定</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>&nbsp;設定&nbsp;<span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <% if @current_omniuser %>
+            <li><a href="#"><%= @current_omniuser.name %></a></li>
+            <li role="presentation" class="divider"></li>
             <li><%= link_to "コンテンツ追加", controller: "content", action: "auth_create" %></li>
-            <li><%= link_to "ログアウト", "#", onclick: "document.formSignOut.submit()" %></li>
+            <li><%= link_to "Sign out", { controller: "session", action: "destroy" }, { method: :delete } %></li>
+            <% else %>
+            <li>
+              <%= link_to "/auth/twitter" do %>
+                <%= image_tag("/assets/twitter-4-20.png") %>&nbsp;Twitter Login
+              <% end %>
+            </li>
+            <li>
+              <%= link_to "/auth/facebook" do %>
+                <%= image_tag("/assets/facebook-4-20.png") %>&nbsp;Facebook Login
+              <% end %>
+            </li>
+            <% end %>
           </ul>
         </li>
       </ul>
