@@ -18,7 +18,7 @@ head_title _title
   </div>
   <!-- /jumbotron -->
   <div class="row content-message">
-    <% @content.messages.each do |message| %>
+    <% @messages.each do |message| %>
     <% user_name = "anonymous" %>
     <div id="m_<%= message.id %>" class="col-lg-4">
       <h4><%= message.id %>:&nbsp;<%= user_name %></h4>
@@ -27,6 +27,11 @@ head_title _title
       <p><%= message.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
     </div>
     <% end %>
+  </div>
+  <!-- /row -->
+
+  <div class="row">
+    <%= paginate @messages %>
   </div>
   <!-- /row -->
 

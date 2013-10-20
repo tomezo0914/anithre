@@ -6,6 +6,9 @@ class ContentController < AnithreController
     _params = show_params
     @content = Content.get_by_id(_params[:id].to_i, status: Content::Status[:public])
     render template: '/shared/error_404', status: 404 and return if @content.blank?
+
+    page = _params[:page]
+    @messages = Message.content_timeline(@content.id, status: Content::Status[:public], page: page)
   end
 
   def auth_create
@@ -40,7 +43,7 @@ class ContentController < AnithreController
   private
 
   def show_params
-    params.permit(:id)
+    params.permit(:id, :page)
   end
 
   def create_params
