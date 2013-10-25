@@ -1,4 +1,9 @@
 $(function() {
+  if ($('#content_description').length) {
+    var content_description = markdown.toHTML($('#content_description').html());
+    $('#content_description').html(content_description);
+  }
+
   // ContentMessageDialog --------------------
   if ($('#showContentMessageDialog').length) {
 
