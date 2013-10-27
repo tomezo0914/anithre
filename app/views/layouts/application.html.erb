@@ -4,6 +4,7 @@
   <title><%= @head_title ? @head_title : 'Anithre' %></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render "shared/global_seo_meta" %>
   <%= stylesheet_link_tag "application", media: "all" %>
   <%= csrf_meta_tags %>
 </head>

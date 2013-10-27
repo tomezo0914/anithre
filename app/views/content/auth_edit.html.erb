@@ -7,6 +7,8 @@
   subtitle = @content.present? ? @content.subtitle : ""
   description = @content.present? ? @content.description : ""
   episode = @content.present? ? @content.episode : ""
+  status = @content.present? ? @content.status : Content::Status[:private]
+  is_checked = status.to_i == Content::Status[:public] ? true : false
 %>
 <%= render "shared/global_navbar" %>
 
@@ -26,9 +28,9 @@
     </div>
     <div class="form-group">
       <label class="">Description</label>
-      <%= text_area_tag("description", description, rows: "7", class: "form-control", :"data-provide" => "markdown") %>
+      <%= text_area_tag("description", description, rows: "10", class: "form-control", :"data-provide" => "markdown") %>
     </div>
-    <label class="checkbox"><%= check_box_tag("publish", 1) %>Publish</label>
+    <label class="checkbox"><%= check_box_tag("publish", status, is_checked) %>Publish</label>
     <button class="btn btn-sm btn-primary" type="submit ">Save</button>
   <% end %>
 
