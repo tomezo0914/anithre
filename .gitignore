@@ -7,6 +7,6 @@
 *.swp
 /log/*
 /tmp/*
+/config/aws.yml
 /config/database.yml
 /config/omniauth.yml
-/public/img/tcs/t

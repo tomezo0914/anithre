@@ -7,7 +7,7 @@ class Message < ActiveRecord::Base
   attr_accessor :user_name
 
   class << self
-    def content_timeline(content_id, status: nil, user_id: nil, page: 1, limit: 3)
+    def content_timeline(content_id, status: nil, user_id: nil, page: 1, limit: 30)
       status = [Status[:private], Status[:public]] if status.blank?
       arel = self.where("content_id = ?", content_id)
       arel = arel.where("status IN (?)", status)

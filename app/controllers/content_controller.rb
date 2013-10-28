@@ -9,6 +9,13 @@ class ContentController < AnithreController
 
     page = _params[:page]
     @messages = Message.content_timeline(@content.id, status: Content::Status[:public], page: page)
+
+    #res = Amazon::Ecs.item_lookup("4088767624", response_group: "Small, ItemAttributes, Images", country: "jp")
+    #@amazon = Amazon::Ecs.item_search(@content.title, search_index: "All", response_group: "Medium", country: "jp")
+    @amazon = Amazon::Ecs.item_search(@content.title, search_index: "DVD", response_group: "Medium", country: "jp")
+    Rails.logger.debug "-----------------"
+    Rails.logger.debug @amazon.marshal_dump
+    Rails.logger.debug "-----------------"
   end
 
   def auth_create

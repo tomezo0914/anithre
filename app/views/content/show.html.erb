@@ -3,6 +3,9 @@ javascript_lazy_include_tag "content"
 content_id = @content.present? ? @content.id  : ''
 _title = "#{@content.title} 第#{@content.episode}話"
 head_title _title
+
+@meta_content = @content.title
+@meta_keyword = @content.title
 %>
 <%= hidden_field_tag 'content_id', content_id %>
 <%= render "shared/global_navbar" %>
@@ -13,8 +16,7 @@ head_title _title
   </div>
   <div class="jumbotron">
     <h3 class="text-muted"><%= @content.subtitle %></h3>
-    <p class="lead"><%= @content.description %></p>
-    <iframe width="560" height="315" src="//www.youtube.com/embed/YDP_VmDnQ-s" frameborder="0" allowfullscreen></iframe>
+    <p class="lead" id="content_description"><%= @content.description %></p>
   </div>
   <!-- /jumbotron -->
   <div class="row content-message">
@@ -35,6 +37,23 @@ head_title _title
   </div>
   <!-- /row -->
 
+  <% if @amazon.present? %>
+  <div class="row">
+    <% @amazon.items.each_with_index do |item, idx| %>
+      <%
+          break if idx == 6
+          idx += 1
+      %>
+      <%= link_to(item.get("DetailPageURL")) do  %>
+        <div class="col-lg-4">
+          <%= image_tag(item.get("MediumImage/URL")) %>
+          <p><%= item.get("ItemAttributes/Title")%></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+  <!-- /row -->
   <%= render "shared/global_footer" %>
 </div>
 <!-- /container -->

@@ -1,5 +1,5 @@
 <%
-  javascript_lazy_include_tag "content"
+  javascript_lazy_include_tag "content", "bootstrap-markdown"
 
   head_title "コンテンツ作成"
 
@@ -7,6 +7,8 @@
   subtitle = @content.present? ? @content.subtitle : ""
   description = @content.present? ? @content.description : ""
   episode = @content.present? ? @content.episode : ""
+  status = @content.present? ? @content.status : Content::Status[:private]
+  is_checked = status.to_i == Content::Status[:public] ? true : false
 %>
 <%= render "shared/global_navbar" %>
 
@@ -16,7 +18,7 @@
       <label class="">Title</label>
       <%= text_field_tag "title", title, placeholder: "Title", class: "form-control" %>
     </div>
-    <div class="form-group">
+      <div class="form-group">
       <label class="">Subtitle</label>
       <%= text_field_tag "subtitle", subtitle, placeholder: "Subtitle", class: "form-control" %>
     </div>
@@ -26,16 +28,12 @@
     </div>
     <div class="form-group">
       <label class="">Description</label>
-      <%= text_area_tag("description", description, rows: "3", class: "form-control") %>
+      <%= text_area_tag("description", description, rows: "10", class: "form-control", :"data-provide" => "markdown") %>
     </div>
+    <label class="checkbox"><%= check_box_tag("publish", status, is_checked) %>Publish</label>
     <button class="btn btn-sm btn-primary" type="submit ">Save</button>
   <% end %>
 
-  <% if @content.present? %>
-  <%= form_tag({ controller: "content", action: "auth_publish", id: @content.id }, role: "form") do %>
-    <button class="btn btn-sm btn-primary" type="submit ">Publish</button>
-  <% end %>
-  <% end %>
   <%= render "shared/global_footer" %>
 </div>
 <!-- /container -->
