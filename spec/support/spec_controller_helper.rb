@@ -1,0 +1,2 @@
+module SpecControllerHelper
+end
