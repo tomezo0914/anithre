@@ -1,7 +1,9 @@
 <%
 javascript_lazy_include_tag "content"
 content_id = @content.present? ? @content.id  : ''
-_title = "#{@content.title} 第#{@content.episode}話"
+
+_title = "#{@content.title}"
+_title = "#{_title} 第#{@content.episode}話" if @content.episode.present?
 head_title _title
 
 @meta_content = @content.title
