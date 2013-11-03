@@ -15,7 +15,7 @@ class MessageController < AnithreController
   private
 
   def create_params
-    params.permit(:content_id, :body)
+    params.permit(:content_id, :body, :user_name)
   end
 
 end

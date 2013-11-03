@@ -17,10 +17,11 @@ $(function() {
         return false;
       }
       var message = $('#message').val();
+      var user_name = $('#user_name').val();
       $.ajax({
         type: 'POST',
         url: '/message/create',
-        data: { content_id: content_id, body: message },
+        data: { content_id: content_id, body: message, user_name: user_name },
         success: function(data, dataType) {
           if (typeof data != 'undefined' && data != null) {
             var data = {
