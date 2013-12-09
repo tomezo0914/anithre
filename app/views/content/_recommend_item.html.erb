@@ -1,0 +1,5 @@
+<% item = @amazon_dvd.items[0] %>
+<%= link_to(item.get("DetailPageURL")) do  %>
+  <%= image_tag(item.get("MediumImage/URL")) %>
+  <p><%= item.get("ItemAttributes/Title")%></p>
+<% end %>

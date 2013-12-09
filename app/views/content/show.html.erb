@@ -24,11 +24,12 @@ head_title _title
   <div class="row content-message">
     <% @messages.each do |message| %>
     <% user_name = "anonymous" %>
-    <div id="m_<%= message.id %>" class="col-lg-4">
-      <h4><%= message.id %>:&nbsp;<%= user_name %></h4>
+    <div id="m_<%= message.id %>" class="col-sm-9 message">
       <p><%= message.body %></p>
-      <hr>
-      <p><%= message.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+      <div class="created">by&nbsp;<%= user_name %>&nbsp;at&nbsp;<%= message.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></div>
+    </div>
+    <div class="col-sm-3">
+      <%= render "recommend_item" %>
     </div>
     <% end %>
   </div>
@@ -39,9 +40,26 @@ head_title _title
   </div>
   <!-- /row -->
 
-  <% if @amazon.present? %>
+  <% if @amazon_dvd.present? %>
   <div class="row">
-    <% @amazon.items.each_with_index do |item, idx| %>
+    <% @amazon_dvd.items.each_with_index do |item, idx| %>
+      <%
+          break if idx == 6
+          idx += 1
+      %>
+      <%= link_to(item.get("DetailPageURL")) do  %>
+        <div class="col-lg-4">
+          <%= image_tag(item.get("MediumImage/URL")) %>
+          <p><%= item.get("ItemAttributes/Title")%></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+  <!-- /row -->
+  <% if @amazon_hobbies.present? %>
+  <div class="row">
+    <% @amazon_hobbies.items.each_with_index do |item, idx| %>
       <%
           break if idx == 6
           idx += 1
