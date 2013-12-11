@@ -10,8 +10,17 @@ class ContentController < AnithreController
     page = _params[:page]
     @messages = Message.content_timeline(@content.id, status: Content::Status[:public], page: page)
 
-    @amazon_dvd = Amazon::Ecs.item_search(@content.title, search_index: "DVD", response_group: "Medium", country: "jp")
-    @amazon_hobbies = Amazon::Ecs.item_search(@content.title, search_index: "Hobbies", response_group: "Medium", country: "jp")
+    amazon_dvd = Amazon::Ecs.item_search(@content.title, search_index: "DVD", response_group: "Medium", country: "jp")
+    amazon_hobbies = Amazon::Ecs.item_search(@content.title, search_index: "Hobbies", response_group: "Medium", country: "jp")
+
+    @amazons = []
+    amazon_dvd.items.each do |item|
+      @amazons << { title: item.get('ItemAttributes/Title'), img: item.get('MediumImage/URL'), url: item.get('DetailPageURL') }
+    end
+    amazon_hobbies.items.each do |item|
+      @amazons << { title: item.get('ItemAttributes/Title'), img: item.get('MediumImage/URL'), url: item.get('DetailPageURL') }
+    end
+    @amazons.shuffle!
 
     #Rails.logger.debug "-----------------"
     #Rails.logger.debug @amazon.marshal_dump

@@ -59,3 +59,5 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 
 gem 'amazon-ecs'
+
+gem 'rdiscount'

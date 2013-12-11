@@ -1,13 +1,13 @@
 <%
-javascript_lazy_include_tag "content"
-content_id = @content.present? ? @content.id  : ''
+  javascript_lazy_include_tag "content", "bootstrap-markdown"
+  content_id = @content.present? ? @content.id  : ''
 
-_title = "#{@content.title}"
-_title = "#{_title} 第#{@content.episode}話" if @content.episode.present?
-head_title _title
+  _title = "#{@content.title}"
+  _title = "#{_title} 第#{@content.episode}話" if @content.episode.present?
+  head_title _title
 
-@meta_content = @content.title
-@meta_keyword = @content.title
+  @meta_content = @content.title
+  @meta_keyword = @content.title
 %>
 <%= hidden_field_tag 'content_id', content_id %>
 <%= render "shared/global_navbar" %>
@@ -22,14 +22,16 @@ head_title _title
   </div>
   <!-- /jumbotron -->
   <div class="row content-message">
-    <% @messages.each do |message| %>
+    <% @messages.each_with_index do |message, idx| %>
     <% user_name = "anonymous" %>
     <div id="m_<%= message.id %>" class="col-sm-9 message">
-      <p><%= message.body %></p>
+      <p class="message-body"><%= raw RDiscount.new(nl2br message.body).to_html %></p>
       <div class="created">by&nbsp;<%= user_name %>&nbsp;at&nbsp;<%= message.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></div>
     </div>
     <div class="col-sm-3">
-      <%= render "recommend_item" %>
+      <% if @amazons.present? && @amazons.size > idx %>
+      <%= render "recommend_item", item: @amazons[idx] %>
+      <% end %>
     </div>
     <% end %>
   </div>
@@ -40,40 +42,24 @@ head_title _title
   </div>
   <!-- /row -->
 
-  <% if @amazon_dvd.present? %>
+  <% if @amazons.present? %>
   <div class="row">
-    <% @amazon_dvd.items.each_with_index do |item, idx| %>
+    <% @amazons.each_with_index do |item, idx| %>
       <%
           break if idx == 6
           idx += 1
       %>
-      <%= link_to(item.get("DetailPageURL")) do  %>
+      <%= link_to(item[:url]) do  %>
         <div class="col-lg-4">
-          <%= image_tag(item.get("MediumImage/URL")) %>
-          <p><%= item.get("ItemAttributes/Title")%></p>
+          <%= image_tag(item[:img]) %>
+          <p><%= item[:title] %></p>
         </div>
       <% end %>
     <% end %>
   </div>
   <% end %>
   <!-- /row -->
-  <% if @amazon_hobbies.present? %>
-  <div class="row">
-    <% @amazon_hobbies.items.each_with_index do |item, idx| %>
-      <%
-          break if idx == 6
-          idx += 1
-      %>
-      <%= link_to(item.get("DetailPageURL")) do  %>
-        <div class="col-lg-4">
-          <%= image_tag(item.get("MediumImage/URL")) %>
-          <p><%= item.get("ItemAttributes/Title")%></p>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <% end %>
-  <!-- /row -->
+
   <%= render "shared/global_footer" %>
 </div>
 <!-- /container -->
@@ -81,10 +67,11 @@ head_title _title
 <%= render "shared/content_message_dialog" %>
 
 <script id="content_each_message" type="text/x-jsrender"">
-<div id="m_{{:id}}" class="col-lg-4">
-  <h3>{{:id}}:&nbsp;{{:user_name}}</h3>
-  <p>{{:message}}</p>
-  <hr>
+<div id="m_{{:id}}" class="col-sm-9 message">
+  <p class="message-body">{{:message}}</p>
   <p>{{:updated_at}}</p>
+  <div class="created">by&nbsp;{{:user_name}}&nbsp;at&nbsp;{{:updated_at}}</div>
+</div>
+<div class="col-sm-3">
 </div>
 </script>

@@ -7,4 +7,10 @@ module ApplicationHelper
     end
     nil
   end
+
+  def nl2br(str, encode_utf: true)
+    str = html_escape(str)
+    str = str.gsub(/\r\n|\r|\n/, '<br />')
+    str = str.gsub('&amp;#', '&#')
+  end
 end

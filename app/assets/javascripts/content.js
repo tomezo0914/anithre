@@ -26,7 +26,7 @@ $(function() {
           if (typeof data != 'undefined' && data != null) {
             var data = {
               id: data.id,
-              message: data.body,
+              message: markdown.toHTML(data.body),
               user_name: data.user_name,
               updated_at: Anithre.Utility.formatDate(new Date(data.updated_at), '%Y-%m-%d %H:%M:%S')
             };
