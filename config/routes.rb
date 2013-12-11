@@ -8,6 +8,8 @@ Anithre::Application.routes.draw do
   post 'content/publish/:id' => 'content#auth_publish'
   get 'content/:id' => 'content#show'
 
+  get 'r/' => 'redirect#index'
+
   post 'message/create' => 'message#auth_create'
 
   get "/auth/:provider/callback" => "session#callback"
