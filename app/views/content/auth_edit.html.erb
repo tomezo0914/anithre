@@ -30,7 +30,7 @@
       <label class="">Description</label>
       <%= text_area_tag("description", description, rows: "10", class: "form-control", :"data-provide" => "markdown") %>
     </div>
-    <label class="checkbox"><%= check_box_tag("publish", status, is_checked) %>Publish</label>
+    <label class="checkbox"><%= check_box_tag("publish[status]", status, is_checked) %>Publish</label>
     <button class="btn btn-sm btn-primary" type="submit ">Save</button>
   <% end %>
 

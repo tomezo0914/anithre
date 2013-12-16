@@ -35,10 +35,15 @@ class Content < ActiveRecord::Base
           content.status = Status[:private]
         end
 
+        Rails.logger.debug "--------------"
+        Rails.logger.debug params.inspect
+        Rails.logger.debug "--------------"
+
         content.title = params[:title]
         content.subtitle = params[:subtitle]
         content.description = params[:description]
         content.episode = params[:episode]
+        content.status = params[:publish].blank? ? Status[:private] : params[:publish]
         content.user_id = user_id
         content.ip = ip
         content.updated_at = current_timestamp
