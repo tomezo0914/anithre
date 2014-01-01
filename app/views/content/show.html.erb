@@ -21,8 +21,8 @@
     <p class="lead" id="content_description"><%= @content.description %></p>
   </div>
   <!-- /jumbotron -->
+  <% @messages.each_with_index do |message, idx| %>
   <div class="row content-message">
-    <% @messages.each_with_index do |message, idx| %>
     <% user_name = "anonymous" %>
     <div id="m_<%= message.id %>" class="col-sm-9 message">
       <p class="message-body"><%= raw RDiscount.new(nl2br message.body).to_html %></p>
@@ -33,8 +33,8 @@
       <%= render "recommend_item", item: @amazons[idx] %>
       <% end %>
     </div>
-    <% end %>
   </div>
+  <% end %>
   <!-- /row -->
 
   <div class="row">
@@ -42,7 +42,7 @@
   </div>
   <!-- /row -->
 
-  <% if @amazons.present? %>
+  <% if @amazons.present? && @messages.blank? %>
   <div class="row">
     <% @amazons.each_with_index do |item, idx| %>
       <%

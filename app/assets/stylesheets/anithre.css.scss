@@ -2,6 +2,12 @@ span.twitter-icon {
   background: url(/assets/twitter-4-20.png) no-repeat 0 0;
 }
 
+.content-message {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
 .message {
   line-height: 1.5;
   .created {
