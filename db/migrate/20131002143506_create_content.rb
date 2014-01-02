@@ -6,10 +6,9 @@ class CreateContent < ActiveRecord::Migration
       t.integer :episode
       t.text :description
       t.integer :user_id, null: false
-      t.string :ip, null: false
+      t.string :ip_address, null: false
       t.integer :status, null: false, default: 0
-      t.timestamp :created_at, null: false
-      t.timestamp :updated_at, null: false
+      t.timestamps
     end
   end
 

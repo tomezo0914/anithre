@@ -19,20 +19,21 @@ ActiveRecord::Schema.define(version: 20131016033900) do
     t.integer  "episode"
     t.text     "description"
     t.integer  "user_id",                 null: false
-    t.string   "ip",                      null: false
+    t.string   "ip_address",              null: false
     t.integer  "status",      default: 0, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "messages", force: true do |t|
     t.integer  "content_id",             null: false
     t.text     "body",                   null: false
-    t.integer  "user_id",                null: false
-    t.string   "ip",                     null: false
+    t.string   "user_hash",              null: false
+    t.string   "user_name"
+    t.string   "ip_address",             null: false
     t.integer  "status",     default: 0, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "omniusers", force: true do |t|

@@ -31,7 +31,6 @@ class Content < ActiveRecord::Base
         content = get_by_id(id) if id.present?
         if content.blank?
           content = self.new
-          content.created_at = current_timestamp
           content.status = Status[:private]
         end
 
@@ -45,8 +44,7 @@ class Content < ActiveRecord::Base
         content.episode = params[:episode]
         content.status = params[:publish].blank? ? Status[:private] : params[:publish]
         content.user_id = user_id
-        content.ip = ip
-        content.updated_at = current_timestamp
+        content.ip_address = ip
 
         content.save!
 

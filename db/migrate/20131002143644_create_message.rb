@@ -3,13 +3,11 @@ class CreateMessage < ActiveRecord::Migration
     create_table :messages do |t|
       t.integer :content_id, null: false
       t.text :body, null: false
-      t.integer :user_id, null: false
+      t.string :user_hash, null: false
       t.string :user_name
-      t.string :ip, null: false
-      t.string :sid, null: false
+      t.string :ip_address, null: false
       t.integer :status, null: false, default: 0
-      t.timestamp :created_at, null: false
-      t.timestamp :updated_at, null: false
+      t.timestamps
     end
   end
 

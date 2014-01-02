@@ -4,8 +4,6 @@ class Message < ActiveRecord::Base
     public: 1
   }
 
-  attr_accessor :user_name
-
   class << self
     def content_timeline(content_id, status: nil, user_id: nil, page: 1, limit: 30)
       status = [Status[:private], Status[:public]] if status.blank?
@@ -18,22 +16,21 @@ class Message < ActiveRecord::Base
     def edit(params)
       self.transaction do
         id = params[:id].present? ? params[:id].to_i : nil
-        current_timestamp = Time.now
         message = nil
         if id.present?
           message = get_by_id(id)
         else
           message = self.new
-          message.created_at = current_timestamp
         end
+
+        content = Content.where("id = ?", params[:content_id].to_i).first
+        hash_key = "#{params[:ip]}#{Time.now.strftime('%Y%m%d')}#{content.title}#{content.episode}"
 
         message.content_id = params[:content_id]
         message.body = params[:body]
-        #message.user_id = params[:user_id]
-        message.user_id = 0
-        message.ip = params[:ip]
+        message.user_hash = Digest::MD5.new.update(hash_key).to_s
+        message.ip_address = params[:ip]
         message.status = Status[:public]
-        message.updated_at = current_timestamp
 
         message.save!
 
